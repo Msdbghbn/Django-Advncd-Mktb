@@ -38,8 +38,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     created_date=models.DateField(auto_now_add=True)
     updated_date=models.DateField(auto_now=True)
 
-    #USERNAME_FIELD = 'email'
-    first_name=models.CharField(max_length=255)
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects=UserManager() 
