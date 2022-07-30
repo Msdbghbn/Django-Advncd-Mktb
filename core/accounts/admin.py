@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from .models import User
 # Register your models here.
 
+
 class CustomUserAdmin(UserAdmin):
     model = User
     list_display= ('email','is_superuser','is_active')
@@ -21,7 +22,19 @@ class CustomUserAdmin(UserAdmin):
             "fields":(
                     'is_superuser','is_active','is_staff'
                     ),
-                }),        
+                }),  
+        ('Group Permissions', {
+            "fields":(
+            'groups','user_permissions'
+            ),
+        }) ,
+
+    ('Important Dates', {
+            "fields":(
+            'last_login',
+            ),
+            }) 
+
             )
     add_fieldsets = (
         (None, {
