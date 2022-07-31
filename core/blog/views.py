@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, RedirectView
 from .models import Post
 from django.shortcuts import get_object_or_404
+from django.views.generic import ListView
 
 
 '''# fbv view
@@ -34,3 +35,6 @@ class RedirectToMaktab(RedirectView):
         post = get_object_or_404(Post, pk=kwargs['pk'])
         print(post)
         return super().get_redirect_url(*args, **kwargs)
+
+class PostList(ListView):
+    model= Post

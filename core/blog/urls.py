@@ -11,4 +11,5 @@ urlpatterns = [
     #path('cbv', TemplateView.as_view(template_name="index.html",extra_context={'name':'ali'})),
     path('cbv',views.IndexView.as_view(),name='cbv-index'),
     path('go-to-maktab/<int:pk>', views.RedirectToMaktab.as_view(), name='redir-to-maktab'),
+    path('post/',views.PostList.as_view(), name='post-list')
 ]
