@@ -40,7 +40,8 @@ class RedirectToMaktab(RedirectView):
 class PostList(ListView):
     # model=Post
     #queryset=Post.objects.all()
+    paginate_by=2
     def get_queryset(self):
         posts=Post.objects.filter(status=True)
         return posts
-    #context_object_name = 'posts'
+    context_object_name = 'posts'
