@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, RedirectView
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView,DetailView,FormView
 from .models import Post
-from .forms import ContactForm
+from .forms import PostForm
 
 
 '''# fbv view
@@ -53,5 +53,9 @@ class PostDetailView(DetailView):
 
 class PostCreateView(FormView):
     template_name = 'contact.html'
-    form_class = ContactForm
+    form_class = PostForm
     success_url = '/blog/post'
+    
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
