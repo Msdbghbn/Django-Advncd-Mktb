@@ -1,3 +1,4 @@
+from os import stat
 from django.shortcuts import render
 from django.views.generic import TemplateView, RedirectView
 from .models import Post
@@ -38,5 +39,8 @@ class RedirectToMaktab(RedirectView):
 
 class PostList(ListView):
     # model=Post
-    queryset=Post.objects.all()
-    context_object_name = 'posts'
+    #queryset=Post.objects.all()
+    def get_queryset(self):
+        posts=Post.objects.filter(status=True)
+        return posts
+    #context_object_name = 'posts'
