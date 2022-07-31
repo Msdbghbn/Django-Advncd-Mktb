@@ -41,7 +41,7 @@ class RedirectToMaktab(RedirectView):
 class PostListView(ListView):
     model=Post
     #queryset=Post.objects.all()
-    paginate_by=2
+    paginate_by=3
     ordering='id'
     # def get_queryset(self):
     #     posts=Post.objects.filter(status=True)
@@ -63,5 +63,9 @@ class PostCreateView(FormView):
 
 class PostCreateView(CreateView):
     model=Post
-    fields= ['author', 'title','content','status','category','published_date']
+    fields= ['title','content','status','category','published_date']
     success_url='/blog/post/'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
