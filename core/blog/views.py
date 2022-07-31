@@ -2,8 +2,9 @@ from os import stat
 from django.shortcuts import render
 from django.views.generic import TemplateView, RedirectView
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView,DetailView
+from django.views.generic import ListView,DetailView,FormView
 from .models import Post
+from .forms import ContactForm
 
 
 '''# fbv view
@@ -49,3 +50,8 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model=Post
+
+class PostCreateView(FormView):
+    template_name = 'contact.html'
+    form_class = ContactForm
+    success_url = '/blog/post'
