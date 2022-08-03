@@ -11,9 +11,7 @@ def post_list(request):
 
 @api_view()
 def post_detail(request,id):
-    try:
-        post=Post.objects.get(pk=id)
-        serializer=PostSerializer(post)
-        return Response(serializer.data)
-    except Post.DoesNotExist:
-        return Response({"detail":"post does not exist"},status=status.HTTP_404_NOT_FOUND)
+    post=get_object_or_404(Post,pk=id)
+    serializer=PostSerializer(post)
+    return Response(serializer.data)
+
