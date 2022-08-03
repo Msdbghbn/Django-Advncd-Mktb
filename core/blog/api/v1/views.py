@@ -15,11 +15,10 @@ def post_list(request):
         return Response(serializer.data)
     elif request.method == "POST":
         serializer=PostSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response(serializer.errors)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
 
 
 @api_view()
