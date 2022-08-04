@@ -64,7 +64,7 @@ def post_detail(request,id):
         post.delete()
         return Response({'detail':'Item remove successfully'},status= status.HTTP_204_NO_CONTENT)
 
-'''
+
 
 class PostDetail(APIView):
     permission_classes=[IsAuthenticatedOrReadOnly]
@@ -86,4 +86,21 @@ class PostDetail(APIView):
         post=get_object_or_404(Post,pk=id,status=True)
         post.delete()
         return Response({'detail':'Item remove successfully'},status= status.HTTP_204_NO_CONTENT)
+
+'''
+
+class PostDetail(GenericAPIView,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin):
+    permission_classes=[IsAuthenticatedOrReadOnly]
+    serializer_class=PostSerializer
+    queryset=Post.objects.filter(status=True)
+    lookup_field='id'
+
+    def get(self,request,*args,**kwargs):
+        return self.retrieve(request,*args,**kwargs)
+    
+    def put(self,request,*args,**kwargs):
+        return self.update(request,*args,**kwargs)
+    
+    def delete(self,request,*args,**kwargs):
+        return self.destroy(request,*args,**kwargs)
 
