@@ -7,7 +7,7 @@ from ...models import Post
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView,ListAPIView,ListCreateAPIView
 from rest_framework import mixins
 
 '''
@@ -40,15 +40,11 @@ class PostList(APIView):
         serializer.save()
         return Response(serializer.data)
 '''
-class PostList(GenericAPIView,mixins.ListModelMixin,mixins.CreateModelMixin):
+class PostList(ListCreateAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
-    def get(self,request,*args,**kwargs):
-        return self.list(request,*args,**kwargs)
-        
-    def post(self,request,*args,**kwargs):
-        return self.create(request,*args,**kwargs)
+
 
 
 
