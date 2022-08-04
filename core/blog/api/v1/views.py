@@ -7,7 +7,7 @@ from ...models import Post
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
-
+from rest_framework.generics import GenericAPIView
 
 '''
 @api_view(["GET","POST"])
@@ -24,13 +24,28 @@ def post_list(request):
         serializer.save()
         return Response(serializer.data)
 '''
-
+'''
 class PostList(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
     def get(self,request):
         posts=Post.objects.filter(status=True)
         serializer=PostSerializer(posts,many=True)
+        return Response(serializer.data)
+
+    def post(self,request):
+        serializer=PostSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+'''
+class PostList(GenericAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = PostSerializer
+    queryset = Post.objects.filter(status=True)
+    def get(self,request):
+        queryset=self.get_queryset()
+        serializer=PostSerializer(queryset,many=True)
         return Response(serializer.data)
 
     def post(self,request):
