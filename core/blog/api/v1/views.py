@@ -1,6 +1,6 @@
 from django.urls import is_valid_path
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from .serializers import PostSerializer
 from ...models import Post
@@ -26,7 +26,8 @@ def post_list(request):
 '''
 
 class PostList(APIView):
-
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = PostSerializer
     def get(self,request):
         posts=Post.objects.filter(status=True)
         serializer=PostSerializer(posts,many=True)
