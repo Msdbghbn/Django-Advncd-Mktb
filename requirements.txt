@@ -4,4 +4,3 @@ pillow
 djangorestframework
 markdown       
 django-filter
-coreapi
