@@ -2,8 +2,8 @@ from django.urls import is_valid_path
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-from .serializers import PostSerializer
-from ...models import Post
+from .serializers import PostSerializer,CategorySerializer
+from ...models import Post, Category
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
@@ -40,7 +40,7 @@ class PostList(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
-'''
+
 class PostList(ListCreateAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
@@ -49,7 +49,7 @@ class PostList(ListCreateAPIView):
 
 
 
-'''
+
 @api_view(['GET','PUT','DELETE'])
 def post_detail(request,id):
     post=get_object_or_404(Post,pk=id,status=True)
@@ -88,7 +88,7 @@ class PostDetail(APIView):
         post.delete()
         return Response({'detail':'Item remove successfully'},status= status.HTTP_204_NO_CONTENT)
 
-'''
+
 
 class PostDetail(RetrieveUpdateDestroyAPIView):
     permission_classes=[IsAuthenticatedOrReadOnly]
@@ -121,4 +121,14 @@ class PostViewSet(viewsets.ViewSet):
         return Response('ok')
     def destroy(self, request, pk=None):
         return Response('ok')
+'''
 
+class PostModelViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = PostSerializer
+    queryset = Post.objects.filter(status=True)
+
+class CategoryModelViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = CategorySerializer
+    queryset = Category.objects.all()
