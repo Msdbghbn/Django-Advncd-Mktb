@@ -146,4 +146,5 @@ AUTH_USER_MODEL = 'accounts.User'
 #     ]
 # }
 
+REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
 
