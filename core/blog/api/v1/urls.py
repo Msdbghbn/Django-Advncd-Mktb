@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
-from rest_framework.routers import DefaultRouter
+from rest_framework.routers import DefaultRouter,SimpleRouter
 
-router=DefaultRouter()
+router=SimpleRouter()
 #router.register('post',views.PostViewSet,basename='post')
 router.register('post',views.PostModelViewSet,basename='post')
 router.register('category',views.CategoryModelViewSet,basename='category')
