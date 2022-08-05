@@ -10,16 +10,17 @@ class PostSerializer(serializers.ModelSerializer):
     snippet=serializers.ReadOnlyField(source='get_snippet')
     relative_url=serializers.URLField(source='get_absolute_api_url',read_only=True)
     absolute_url=serializers.SerializerMethodField(method_name='get_abs_url')
+    category=serializers.SlugRelatedField(many=False,slug_field='name',queryset=Category.objects.all())
     class Meta:
         model = Post
-        fields = ['id','author','title','content','snippet','status','relative_url','absolute_url','created_date','published_date']
-    
+        fields = ['id','author','title','content','category','snippet','status','relative_url','absolute_url','created_date','published_date']
     def get_abs_url(self,obj):
         #obj here is the output of __str__ method of Post model which returns title of the each post. so obj here is the title of each post.
         #obj.pk returns the pk of each post.
         request=self.context.get('request')
         #return request.build_absolute_uri(obj)
         return request.build_absolute_uri(obj.pk)
+  
 
 
 
