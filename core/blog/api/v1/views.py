@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView,ListAPIView,ListCreateAPIView,RetrieveUpdateDestroyAPIView
 from rest_framework import mixins
+from rest_framework import viewsets
 
 '''
 @api_view(["GET","POST"])
@@ -94,4 +95,30 @@ class PostDetail(RetrieveUpdateDestroyAPIView):
     serializer_class=PostSerializer
     queryset=Post.objects.filter(status=True)
     lookup_field='id'
+
+class PostViewSet(viewsets.ViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = PostSerializer
+    queryset = Post.objects.filter(status=True)
+
+    def list(self,request):
+        serializer=self.serializer_class(self.queryset,many=True)
+        return Response(serializer.data)
+    
+    def retrieve(self,request,pk=None):
+        post_object=get_object_or_404(self.queryset,pk=pk)
+        serializer=self.serializer_class(post_object)
+        return Response(serializer.data)
+
+    # other CURDE functions also like that. So we did not completed them and used 'Response('ok')' only.
+    def create(self, request):
+        return Response('ok')
+    def retrieve(self, request, pk=None):
+        return Response('ok')
+    def update(self, request, pk=None):
+        return Response('ok')
+    def partial_update(self, request, pk=None):
+        return Response('ok')
+    def destroy(self, request, pk=None):
+        return Response('ok')
 
