@@ -13,7 +13,7 @@ class PostSerializer(serializers.ModelSerializer):
     category=serializers.SlugRelatedField(many=False,slug_field='name',queryset=Category.objects.all())
     class Meta:
         model = Post
-        fields = ['id','author','title','content','category','snippet','status','relative_url','absolute_url','created_date','published_date']
+        fields = ['id','author','image','title','content','category','snippet','status','relative_url','absolute_url','created_date','published_date']
     def get_abs_url(self,obj):
         #obj here is the output of __str__ method of Post model which returns title of the each post. so obj here is the title of each post.
         #obj.pk returns the pk of each post.
@@ -21,7 +21,14 @@ class PostSerializer(serializers.ModelSerializer):
         #return request.build_absolute_uri(obj)
         return request.build_absolute_uri(obj.pk)
     def to_representation(self, instance):
+        request=self.context.get('request')
         rep= super().to_representation(instance)
+        if request.parser_context.get('kwargs').get('pk'):
+            rep.pop('snippet', None)
+            rep.pop('relative_url',None)
+            rep.pop('absolute_url',None)
+        else:
+            rep.pop('content',None)
         rep['category']=CategorySerializer(instance.category).data
         return rep
 
