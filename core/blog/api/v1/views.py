@@ -1,21 +1,26 @@
 from django.urls import is_valid_path
-from rest_framework.decorators import api_view, permission_classes,action
-from rest_framework.permissions import IsAuthenticatedOrReadOnly,IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes, action
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.response import Response
-from .serializers import PostSerializer,CategorySerializer
+from .serializers import PostSerializer, CategorySerializer
 from ...models import Post, Category
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView,ListAPIView,ListCreateAPIView,RetrieveUpdateDestroyAPIView
+from rest_framework.generics import (
+    GenericAPIView,
+    ListAPIView,
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
+)
 from rest_framework import mixins
 from rest_framework import viewsets
 from .permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter,OrderingFilter
+from rest_framework.filters import SearchFilter, OrderingFilter
 from .paginations import DefaultPagination
 
-'''
+"""
 @api_view(["GET","POST"])
 @permission_classes([IsAuthenticated])
 def post_list(request):
@@ -29,8 +34,8 @@ def post_list(request):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
-'''
-'''
+"""
+"""
 class PostList(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
@@ -125,16 +130,21 @@ class PostViewSet(viewsets.ViewSet):
         return Response('ok')
     def destroy(self, request, pk=None):
         return Response('ok')
-'''
+"""
+
 
 class PostModelViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated,IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
-    filter_backends = [DjangoFilterBackend,SearchFilter,OrderingFilter]
-    filterset_fields = {'category':['exact','in'],'author':['exact','in'],'status':['exact']}
-    search_fields=['title','content']
-    ordering_fields=['published_date']
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = {
+        "category": ["exact", "in"],
+        "author": ["exact", "in"],
+        "status": ["exact"],
+    }
+    search_fields = ["title", "content"]
+    ordering_fields = ["published_date"]
     pagination_class = DefaultPagination
 
     # @action(methods=['get'],detail=False)
