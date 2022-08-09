@@ -10,6 +10,8 @@ from ...models import Profile
 from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
 from mail_templated import send_mail
+from mail_templated import EmailMessage
+from ..utils import EmailThread
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -91,6 +93,7 @@ class ProfileApiView(generics.RetrieveUpdateAPIView):
 class TestEmailSend(generics.GenericAPIView):
 
     def get(self,request, *args, **kwargs):
-        send_mail('email/hello.tpl', {'name': 'ali'}, 'admin@admin.com', ['masood.b2010@gmail.com'])
+        email_obj = EmailMessage('email/hello.tpl', {'name': 'ali'}, 'admin@admin.com', to=['masood.b2010@gmail.com'])
+        EmailThread(email_obj).start()
         return Response('email sent')
 
