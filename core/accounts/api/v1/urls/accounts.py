@@ -12,6 +12,13 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     #registretion
     path('registration/',views.RegistrationView.as_view(),name='registration'),
+    #activation
+    path('test-email',views.TestEmailSend.as_view(),name='test-email'),
+    #path('activation/confirm'),
+    #path('activation/resend'),
+
+    #resend activation
+
     #change password
     path('change-password',views.ChangePasswordAPIView.as_view(),name='change-password'),
     #reset password
