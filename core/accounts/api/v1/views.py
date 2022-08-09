@@ -9,6 +9,7 @@ from django.contrib.auth import get_user_model
 from ...models import Profile
 from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
+from mail_templated import send_mail
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -88,13 +89,8 @@ class ProfileApiView(generics.RetrieveUpdateAPIView):
         return obj
 
 class TestEmailSend(generics.GenericAPIView):
-    def post(self,request,*args,**kwargs):
-        send_mail(
-        'Subject here',
-        'Here is the message.',
-        'from@example.com',
-        ['to@example.com'],
-            fail_silently=False,
-        )
+
+    def get(self,request, *args, **kwargs):
+        send_mail('email/hello.tpl', {'name': 'ali'}, 'admin@admin.com', ['masood.b2010@gmail.com'])
         return Response('email sent')
 

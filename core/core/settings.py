@@ -43,8 +43,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_yasg',
-     'rest_framework.authtoken',
-     'rest_framework_simplejwt'
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'mail_templated'
 ]
 
 MIDDLEWARE = [
