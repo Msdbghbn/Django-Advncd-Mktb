@@ -9,6 +9,7 @@ markdown
 django-filter
 drf-yasg[validation]
 djangorestframework-simplejwt
+djsoer
 #deployment modules
 
 # email third party modules
