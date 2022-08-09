@@ -17,3 +17,4 @@ django-mail-templated
 
 #refactoring and test
 black
+flake8

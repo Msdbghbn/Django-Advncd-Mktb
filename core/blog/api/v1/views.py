@@ -1,6 +1,9 @@
 from django.urls import is_valid_path
 from rest_framework.decorators import api_view, permission_classes, action
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.permissions import (
+    IsAuthenticatedOrReadOnly,
+    IsAuthenticated,
+)
 from rest_framework.response import Response
 from .serializers import PostSerializer, CategorySerializer
 from ...models import Post, Category
