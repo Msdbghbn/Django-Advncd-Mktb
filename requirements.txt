@@ -2,14 +2,14 @@
 django >3.2,<3.3
 python-decouple==3.6
 pillow
-djangorestframework
+djangorestframework==3.13.1
 
 #third-party modules
 markdown       
 django-filter
 drf-yasg[validation]
-djangorestframework-simplejwt
-djsoer
+djangorestframework-simplejwt==4.8.0
+djoser==2.1.0
 #deployment modules
 
 # email third party modules
@@ -20,3 +20,7 @@ black
 flake8
 pytest
 pytest-django
+
+
+
+
