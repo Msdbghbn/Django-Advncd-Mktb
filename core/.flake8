@@ -8,6 +8,8 @@ exclude =
     venv,
     .env
     settings.py
-    __init__
+    __init__.py
+    *_initial.py
+    *Tests.py
+    *tests.py
 ignore=
-    F401

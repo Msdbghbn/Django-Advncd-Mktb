@@ -40,7 +40,9 @@ class PostSerializer(serializers.ModelSerializer):
         read_only_fields = ["author"]
 
     def get_abs_url(self, obj):
-        # obj here is the output of __str__ method of Post model which returns title of the each post. so obj here is the title of each post.
+        # obj here is the output of __str__ method of Post model
+        # which returns title of the each post. so obj here is the
+        # title of each post.
         # obj.pk returns the pk of each post.
         request = self.context.get("request")
         # return request.build_absolute_uri(obj)

@@ -1,13 +1,10 @@
-from ast import Delete
-from os import stat
-from sre_constants import SUCCESS
-from django.shortcuts import render
+
 from django.views.generic import TemplateView, RedirectView
 from django.shortcuts import get_object_or_404
 from django.views.generic import (
     ListView,
     DetailView,
-    FormView,
+    # FormView,
     CreateView,
     UpdateView,
     DeleteView,
@@ -16,17 +13,17 @@ from .models import Post
 from .forms import PostForm
 from django.contrib.auth.mixins import (
     LoginRequiredMixin,
-    PermissionRequiredMixin,
+    # PermissionRequiredMixin,
 )
 
 
-"""# fbv view
+""" fbv view
 def indexView(request):
     return render(request, 'index.html')
 Create your views here.
 """
 
-""" #redirect for fbv
+""" redirect for fbv
 from django.shortcuts import redirect
 def RedirectToMaktab(request):
     return redirect('https://maktabkhooneh.org/')
@@ -74,7 +71,6 @@ class PostCreateView(FormView):
     template_name = 'contact.html'
     form_class = PostForm
     success_url = '/blog/post'
-    
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
@@ -94,7 +90,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 class PostEditView(LoginRequiredMixin, UpdateView):
     model = Post
     form_class = PostForm
-    success_url = "/blog/post/"  # its template is post_form.html. so creating and edding of form uses the same template
+    success_url = "/blog/post/" ''''its template is post_form.html.
+     so creating and edding of form uses the same template'''
 
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):

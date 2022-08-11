@@ -15,20 +15,19 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from ...models import Profile
 from django.shortcuts import get_object_or_404
-from django.core.mail import send_mail
-from mail_templated import send_mail
 from mail_templated import EmailMessage
 from ..utils import EmailThread
 import jwt
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.conf import settings
 from jwt.exceptions import ExpiredSignatureError, InvalidSignatureError
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-    TokenVerifyView,
-)
-
+from rest_framework_simplejwt.views import TokenObtainPairView
+# from rest_framework_simplejwt.views import (
+# TokenObtainPairView,
+# TokenRefreshView,
+# TokenVerifyView,)
+# from django.core.mail import send_mail
+# from mail_templated import send_mail
 User = get_user_model()
 
 

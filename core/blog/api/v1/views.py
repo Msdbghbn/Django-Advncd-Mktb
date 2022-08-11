@@ -1,22 +1,21 @@
-from django.urls import is_valid_path
-from rest_framework.decorators import api_view, permission_classes, action
+# from django.urls import is_valid_path
+# from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
     IsAuthenticated,
 )
-from rest_framework.response import Response
+# from rest_framework.response import Response
 from .serializers import PostSerializer, CategorySerializer
 from ...models import Post, Category
-from rest_framework import status
-from django.shortcuts import get_object_or_404
-from rest_framework.views import APIView
-from rest_framework.generics import (
-    GenericAPIView,
-    ListAPIView,
-    ListCreateAPIView,
-    RetrieveUpdateDestroyAPIView,
-)
-from rest_framework import mixins
+# from rest_framework import status
+# from django.shortcuts import get_object_or_404
+# from rest_framework.views import APIView
+# from rest_framework.generics import (
+# GenericAPIView,
+# ListAPIView,
+# ListCreateAPIView,
+# RetrieveUpdateDestroyAPIView,)
+# from rest_framework import mixins
 from rest_framework import viewsets
 from .permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
@@ -75,7 +74,8 @@ def post_detail(request,id):
         return Response(serializer.data)
     elif request.method == "DELETE":
         post.delete()
-        return Response({'detail':'Item remove successfully'},status= status.HTTP_204_NO_CONTENT)
+        return Response({'detail':'Item remove successfully'},
+                        status= status.HTTP_204_NO_CONTENT)
 
 
 
@@ -94,11 +94,11 @@ class PostDetail(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
-        
     def delete(self,request,id):
         post=get_object_or_404(Post,pk=id,status=True)
         post.delete()
-        return Response({'detail':'Item remove successfully'},status= status.HTTP_204_NO_CONTENT)
+        return Response({'detail':'Item remove successfully'},
+                        status= status.HTTP_204_NO_CONTENT)
 
 
 
@@ -116,13 +116,13 @@ class PostViewSet(viewsets.ViewSet):
     def list(self,request):
         serializer=self.serializer_class(self.queryset,many=True)
         return Response(serializer.data)
-    
     def retrieve(self,request,pk=None):
         post_object=get_object_or_404(self.queryset,pk=pk)
         serializer=self.serializer_class(post_object)
         return Response(serializer.data)
 
-    # other CURDE functions also like that. So we did not completed them and used 'Response('ok')' only.
+    # other CURDE functions also like that. So we did not completed
+    #  them and used 'Response('ok')' only.
     def create(self, request):
         return Response('ok')
     def retrieve(self, request, pk=None):
