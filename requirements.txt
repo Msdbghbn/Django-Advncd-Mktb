@@ -1,25 +1,26 @@
 #general modules
 django >3.2,<3.3
 python-decouple==3.6
-pillow
+Pillow==9.2.0
 djangorestframework==3.13.1
 
 #third-party modules
-markdown       
-django-filter
-drf-yasg[validation]
+Markdown==3.4.1       
+django-filter==22.1
+drf-yasg[validation]==1.21.3
 djangorestframework-simplejwt==4.8.0
 djoser==2.1.0
 #deployment modules
 
 # email third party modules
-django-mail-templated
+django-mail-templated==2.6.5
 
 #refactoring and test
-black
-flake8
-pytest
-pytest-django
+black==22.6.0
+flake8==5.0.4
+pytest==7.1.2
+pytest-django==4.5.2
+Faker==13.15.1
 
 
 
