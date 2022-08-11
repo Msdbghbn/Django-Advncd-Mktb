@@ -54,7 +54,7 @@ class PostListView(ListView):
     permission_required = "blog.view_post"
     model = Post
     # queryset=Post.objects.all()
-    paginate_by = 3
+    paginate_by = 5
     ordering = "id"
     # def get_queryset(self):
     #     posts=Post.objects.filter(status=True)
