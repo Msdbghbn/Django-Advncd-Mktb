@@ -22,6 +22,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.conf import settings
 from jwt.exceptions import ExpiredSignatureError, InvalidSignatureError
 from rest_framework_simplejwt.views import TokenObtainPairView
+
 # from rest_framework_simplejwt.views import (
 # TokenObtainPairView,
 # TokenRefreshView,

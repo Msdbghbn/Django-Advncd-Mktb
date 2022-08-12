@@ -4,9 +4,11 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
     IsAuthenticated,
 )
+
 # from rest_framework.response import Response
 from .serializers import PostSerializer, CategorySerializer
 from ...models import Post, Category
+
 # from rest_framework import status
 # from django.shortcuts import get_object_or_404
 # from rest_framework.views import APIView
@@ -137,7 +139,7 @@ class PostViewSet(viewsets.ViewSet):
 
 
 class PostModelViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsOwnerOrReadOnly,IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
