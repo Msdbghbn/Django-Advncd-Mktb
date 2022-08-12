@@ -185,3 +185,13 @@ CORS_ALLOW_ALL_ORIGINS = True  # everyone allowed to access
 # celery configs
 CELERY_BROKER_URL = 'redis://redis:6379/1'
 # 
+
+CELERY_BEAT_SCHEDULE = {
+'send_email':{
+    'task':'accounts.tasks.endEmail',
+    'schedule':5,
+    #args,
+    #kwargs,
+}
+
+}
