@@ -1,4 +1,3 @@
-
 from django.views.generic import TemplateView, RedirectView
 from django.shortcuts import get_object_or_404
 from django.views.generic import (
@@ -90,8 +89,11 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 class PostEditView(LoginRequiredMixin, UpdateView):
     model = Post
     form_class = PostForm
-    success_url = "/blog/post/" ''''its template is post_form.html.
-     so creating and edding of form uses the same template'''
+    success_url = (
+        "/blog/post/"
+        """'its template is post_form.html.
+     so creating and edding of form uses the same template"""
+    )
 
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
@@ -100,4 +102,4 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
 
 class PostListApiView(TemplateView):
-    template_name = 'blog/post_list_api.html'
+    template_name = "blog/post_list_api.html"

@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "mail_templated",
     "djoser",
-    "corsheaders"
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -176,7 +176,7 @@ EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 EMAIL_PORT = 25
 
-CORS_ALLOW_ALL_ORIGINS = True#everyone allowed to access
+CORS_ALLOW_ALL_ORIGINS = True  # everyone allowed to access
 # CORS_ALLOWED_ORIGINS = [
 
 #     'http://127.0.0.1:5500/'
