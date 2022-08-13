@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     "mail_templated",
     "djoser",
     "corsheaders",
-    'django_celery_beat'
+    #'django_celery_beat'
 ]
 
 MIDDLEWARE = [

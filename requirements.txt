@@ -12,7 +12,7 @@ djangorestframework-simplejwt==4.8.0
 djoser==2.1.0
 django-cors-headers==3.13.0
 #deployment modules
-
+gunicorn
 # email third party modules
 django-mail-templated
 
