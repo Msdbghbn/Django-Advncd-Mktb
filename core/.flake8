@@ -12,4 +12,5 @@ exclude =
     *_initial.py
     *Tests.py
     *tests.py
+    celery.py
 ignore=

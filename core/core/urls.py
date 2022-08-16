@@ -23,6 +23,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.http import HttpResponse
+
 schema_view = get_schema_view(
     openapi.Info(
         title="Blog API",
@@ -36,13 +37,13 @@ schema_view = get_schema_view(
     permission_classes=[permissions.AllowAny],
 )
 
-def indexView(request):
-    return HttpResponse('<h1> Index Page </h1>')
 
+def indexView(request):
+    return HttpResponse("<h1> Index Page </h1>")
 
 
 urlpatterns = [
-    path("",indexView,name='index'),
+    path("", indexView, name="index"),
     path("admin/", admin.site.urls),
     path("blog/", include("blog.urls")),
     path("accounts/", include("accounts.urls")),
